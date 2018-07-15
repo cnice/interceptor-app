@@ -44,6 +44,14 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
             }
           }
         },
@@ -55,6 +63,9 @@
           "configurations": {
             "production": {
               "browserTarget": "interceptor-app:build:production"
+            },
+            "local": {
+              "browserTarget": "interceptor-app:build:local"
             }
           }
         },
