@@ -8,9 +8,7 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class StatusCodesInterceptor implements HttpInterceptor {
 
-    constructor(private router: Router) {
-
-    }
+   // onstructor(private router: Router) {}
 
   /**
    *
@@ -35,12 +33,12 @@ export class StatusCodesInterceptor implements HttpInterceptor {
                         case 403:
                             console.log(`Request for ${req.urlWithParams} failed. ${err.message}`);
 
-                            this.router.navigate(['/no-access'], { queryParams: { message: err.message }, skipLocationChange: true });
+                            // this.router.navigate(['/no-access'], { queryParams: { message: err.message }, skipLocationChange: true });
                             break;
                         case 404:
                             console.log(`Request for ${req.urlWithParams} failed. ${err.message}`);
 
-                            this.router.navigate(['/PageNotFound'], { queryParams: { message: err.message }, skipLocationChange: true});
+                            // this.router.navigate(['/PageNotFound'], { queryParams: { message: err.message }, skipLocationChange: true});
                             break;
                     }
                 }

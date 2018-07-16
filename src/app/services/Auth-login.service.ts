@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class AuthService {
+export class AuthLoginService {
 
     private getValidateAccessUrl = environment.WebApiUrl + '/values';
     constructor(private httpClient: HttpClient) {
