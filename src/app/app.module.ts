@@ -8,20 +8,26 @@ import { AppComponent } from './app.component';
 
 // Interceptors
 import { httpInterceptorProviders } from './http-interceptors/interceptors.index';
-import { AuthLoginService } from './services/Auth-login.service';
+import { AuthService } from './services/auth.service';
+import { LoginComponent } from './login/login.component';
+
+// App Routing
+import { AppRoutingModule } from './app-router.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   // Add Interceptor to providers at root app level.
   providers: [
     httpInterceptorProviders,
-    AuthLoginService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
