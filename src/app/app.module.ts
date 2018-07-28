@@ -9,15 +9,25 @@ import { AppComponent } from './app.component';
 // Interceptors
 import { httpInterceptorProviders } from './http-interceptors/interceptors.index';
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './login/login.component';
 
 // App Routing
 import { AppRoutingModule } from './app-router.module';
 
+import { LoginComponent } from './login/login.component';
+import { ProtectedComponent } from './protected/protected.component';
+import { HomeComponent } from './home/home.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    HomeComponent,
+    LoginComponent,
+    ProtectedComponent,
+    NoAccessComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

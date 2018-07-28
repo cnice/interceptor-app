@@ -6,30 +6,29 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class AuthService {
 
-    private getValidateAccessUrl = environment.WebApiUrl + '/values';
+    private getAuthTokenUrl = environment.WebApiUrl + '/values/Login';
     private payload: any;
 
     constructor(private httpClient: HttpClient) {}
 
-    login(user: string, password: string): boolean {
-        let success = false;
+    login(loginModel: LoginModel): boolean {
 
-        this.httpClient.get(this.getValidateAccessUrl).toPromise().then(result => {
-            this.payload = result;
-            localStorage.setItem('token', this.payload.title);
-            success = true;
-        });
-
-        return success;
-        // return this.httpClient.get(this.getValidateAccessUrl).toPromise();
+        if (!this.payload) {
+            this.httpClient.post(this.getAuthTokenUrl, loginModel).toPromise().then(result => {
+                this.payload = result;
+                localStorage.setItem('user', this.payload.user.name);
+            });
+          return true;
+        }
     }
 
     logout(): any {
         localStorage.clear();
+        this.payload = undefined;
     }
 
     getUser(): any {
-        return localStorage.getItem('token');
+        return localStorage.getItem('user');
     }
 
     isLoggedIn(): boolean {
@@ -40,3 +39,8 @@ export class AuthService {
 export const AUTH_PROVIDERS: Array<any> = [
     { provide: AuthService, userClass: AuthService }
 ];
+
+export class LoginModel {
+    UserName: string;
+    Password: string;
+}
