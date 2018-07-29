@@ -4,6 +4,7 @@ import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse
 
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class StatusCodesInterceptor implements HttpInterceptor {
@@ -24,7 +25,7 @@ export class StatusCodesInterceptor implements HttpInterceptor {
         .pipe(
             tap(response => {
               if (response instanceof HttpResponse) {
-
+                    // do stuff with response if you want
               }
             }, (err: any) => {
                 if (err instanceof HttpErrorResponse) {
@@ -33,12 +34,7 @@ export class StatusCodesInterceptor implements HttpInterceptor {
                         case 403:
                             // console.log(`Request for ${req.urlWithParams} failed. ${err.message}`);
 
-                            this.router.navigate(['/no-access'], { queryParams: { message: err.message }, skipLocationChange: true });
-                            break;
-                        case 404:
-                            // console.log(`Request for ${req.urlWithParams} failed. ${err.message}`);
-
-                            this.router.navigate(['/pagenotfound'], { queryParams: { message: err.message }, skipLocationChange: true});
+                            this.router.navigate(['/no-access']);
                             break;
                     }
                 }

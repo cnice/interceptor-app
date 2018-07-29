@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-protected',
@@ -6,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ProtectedComponent implements OnInit {
-    constructor() { }
 
-    ngOnInit() { }
+    public ContactInfo: any;
+
+    constructor(private authService: AuthService) { }
+
+    ngOnInit() {
+
+    }
+
+    getUserContactInfo() {
+        this.authService.getUserContactInfo().then(response => {
+            this.ContactInfo = response.contactInfo;
+        });
+    }
 }

@@ -2,3 +2,12 @@
 <p>
     Protected Content
 </p>
+<a class="btn btn-default" (click)="getUserContactInfo()">
+    Show Contact Info
+</a>
+<div class="well" *ngIf="ContactInfo">
+    Contact Info:
+    Address: <b>{{ContactInfo.address}}</b>
+    State: <b>{{ContactInfo.state}}</b>
+    Zip: <b>{{ContactInfo.zipcode}}</b>
+</div>
