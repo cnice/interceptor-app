@@ -7,9 +7,13 @@ import { AuthService } from '../services/auth.service';
 })
 
 export class HomeComponent implements OnInit {
+    public WelcomeMsg: any;
+
     constructor(private authService: AuthService) { }
 
     ngOnInit() {
-
+        this.authService.getWelcomeMessage().then(response => {
+          this.WelcomeMsg = response;
+        });
     }
 }

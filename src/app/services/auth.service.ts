@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { promise } from '../../../node_modules/protractor';
 
 @Injectable()
 export class AuthService {
 
+    private getWelcomeMsgUrl = environment.WebApiUrl + '/values';
     private getAuthTokenUrl = environment.WebApiUrl + '/values/Login';
     private getUserContactInfoUrl = environment.WebApiUrl + '/values/GetUserContactInfo';
     private payload: any;
@@ -14,15 +14,12 @@ export class AuthService {
     constructor(private httpClient: HttpClient) {}
 
     login(loginModel: LoginModel): boolean {
-
-        if (!this.payload) {
-            this.httpClient.post(this.getAuthTokenUrl, loginModel).toPromise().then(result => {
-                this.payload = result;
-                localStorage.setItem('user', this.payload.user.name);
-                localStorage.setItem('token', this.payload.user.token);
-            });
-          return true;
-        }
+        this.httpClient.post(this.getAuthTokenUrl, loginModel).toPromise().then(result => {
+            this.payload = result;
+            localStorage.setItem('user', this.payload.user.name);
+            localStorage.setItem('token', this.payload.user.token);
+        });
+        return true;
     }
 
     logout(): any {
@@ -44,6 +41,10 @@ export class AuthService {
 
     getUserContactInfo(): Promise<any> {
        return this.httpClient.get(this.getUserContactInfoUrl).toPromise().then(result => result);
+    }
+
+    getWelcomeMessage(): Promise<any> {
+        return this.httpClient.get(this.getWelcomeMsgUrl, { responseType: 'text' }).toPromise().then(result => result);
     }
 }
 

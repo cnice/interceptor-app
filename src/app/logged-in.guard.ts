@@ -8,7 +8,8 @@ import { AuthService } from './services/auth.service';
 export class LoggedInGuard implements CanActivate {
     constructor(private authService: AuthService) { }
 
-    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+                    Observable<boolean> | Promise<boolean> | boolean {
         const isLoggedIn = this.authService.isLoggedIn();
         console.log('canActivate', isLoggedIn);
         return isLoggedIn;

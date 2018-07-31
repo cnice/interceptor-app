@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class LoggerService {
+@Injectable()
+export class MessageService {
   messages: string[] = [];
 
   add(message: string) {

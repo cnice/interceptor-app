@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService, LoginModel } from '../services/auth.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
     selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent {
    constructor(public authService: AuthService) {
        this.message = '';
    }
+
    login(username: string, password: string): boolean {
        this.message = '';
 
@@ -21,7 +23,7 @@ export class LoginComponent {
        this.loginModel.Password = password;
 
        if (!this.authService.login(this.loginModel)) {
-           this.message = 'Incorrect credentials.';
+           this.message = 'Incorrect credentials. Try again!';
        }
        return false;
    }

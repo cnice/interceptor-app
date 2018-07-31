@@ -13,12 +13,10 @@ export class ProtectedComponent implements OnInit {
     constructor(private authService: AuthService) { }
 
     ngOnInit() {
-
-    }
-
-    getUserContactInfo() {
-        this.authService.getUserContactInfo().then(response => {
-            this.ContactInfo = response.contactInfo;
-        });
+        if (this.authService.isLoggedIn()) {
+            this.authService.getUserContactInfo().then(response => {
+                this.ContactInfo = response.contactInfo;
+            });
+        }
     }
 }

@@ -7,24 +7,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 // Interceptors
-import { httpInterceptorProviders } from './http-interceptors/interceptors.index';
+import { httpInterceptorProviders } from './interceptors/interceptors.index';
+
+// Services
 import { AuthService } from './services/auth.service';
+import { MessageService } from './services/message.service';
 
 // App Routing
 import { AppRoutingModule } from './app-router.module';
 
 import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
-import { HomeComponent } from './home/home.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MessageComponent } from './messages/message.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
+    MessageComponent,
     ProtectedComponent,
     NoAccessComponent,
     PageNotFoundComponent
@@ -37,7 +40,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   // Add Interceptor to providers at root app level.
   providers: [
     httpInterceptorProviders,
-    AuthService
+    AuthService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
