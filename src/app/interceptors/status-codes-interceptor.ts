@@ -19,8 +19,8 @@ export class StatusCodesInterceptor implements HttpInterceptor {
 
         return next.handle(req)
         .pipe(
-            tap(response => {
-              if (response instanceof HttpResponse) {
+            tap(event => {
+              if (event instanceof HttpResponse) {
                     // do stuff with response if you want
               }
             }, (err: any) => {

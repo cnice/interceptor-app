@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService, LoginModel } from '../services/auth.service';
-import { MessageService } from '../services/message.service';
+import { AuthService } from '../services/auth.service';
+import { LoginModel } from '../models/login-model';
 
 @Component({
     selector: 'app-login',
@@ -15,17 +15,18 @@ export class LoginComponent {
        this.message = '';
    }
 
-   login(username: string, password: string): boolean {
+   login(username: string, password: string) {
        this.message = '';
 
        this.loginModel = new LoginModel();
        this.loginModel.UserName = username;
        this.loginModel.Password = password;
 
-       if (!this.authService.login(this.loginModel)) {
-           this.message = 'Incorrect credentials. Try again!';
-       }
-       return false;
+       this.authService.login(this.loginModel).then(() => {
+        if ( !this.authService.isLoggedIn() ) {
+            this.message = 'Incorrect credentials. Try again!';
+        }
+       });
    }
    logout(): boolean {
        this.authService.logout();
